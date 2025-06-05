@@ -1,5 +1,9 @@
 # === Tintinnabuli Harmonizer ===
 
+
+from melody_utils import mirror_melody
+from harmony_utils import harmonize_melody
+
 MAJOR_SCALES = {
     'C': ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
     'G': ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
@@ -80,36 +84,20 @@ def get_parallel_interval(note, scale, interval):
     except ValueError:
         return None
 
-def harmonize_melody(melody_note, key='C', mode='major', tintinnabuli_levels=[-1], extra_m_intervals=[]):
-    try:
-        midi_val = note_to_midi(melody_note)
-    except:
-        return {"Error": f"Invalid melody note: {melody_note}"}
 
-    scale = get_scale_notes(key, mode)
-    if not scale:
-        return {"Error": f"Unsupported key or mode: {key} {mode}"}
-    triad = get_triad(scale)
+if __name__ == "__main__":
+    test_note = "E4"
+    print(f"Harmonizing note: {test_note}")
+    result = harmonize_melody(
+        melody_note=test_note,
+        key="C",
+        mode="major",
+        tintinnabuli_levels=[-1, -2],
+        extra_m_intervals=[-9]  # Major sixth below
+    )
+    for voice, note in result.items():
+        print(f"{voice}: {note}")
 
-    result = {'M': melody_note}
 
-    for interval in extra_m_intervals:
-        label = f"M{interval:+}"
-        result[label] = midi_to_note(midi_val + interval)
-
-    for level in tintinnabuli_levels:
-        if level < 0:
-            tn = get_triad_note(scale[0], triad, abs(level), direction='below')
-            if tn:
-                result[f"T{level}"] = tn
-        else:
-            tn = get_triad_note(scale[0], triad, level, direction='above')
-            if tn:
-                result[f"T{level}"] = tn
-    return result
-
-def mirror_melody(melody_midi, axis_note="Eb4"):
-    axis_midi = note_to_midi(axis_note)
-    return [(axis_midi - (p - axis_midi), d) for p, d in melody_midi]
 
 # === TEST CASE FU
