@@ -1,36 +1,25 @@
-# Tintinnabuli Harmonizer
+# StyleFinder (Millner AI Music Project)
 
-A Python-based tool that generates harmonic voices based on Arvo Pärt's tintinnabuli composition technique.
+This repository contains tools for analyzing and clustering musical scores based on extracted features. It supports the AIMystica project by visually comparing stylistic relationships between the works of Anthony Millner and selected inspirational composers.
 
-## 🎯 Project Goals
+## Tools
 
-- Input a melody note or short melody
-- Output one or more harmony notes based on tintinnabuli rules
-- Support various harmonic strategies (e.g., parallel major 6ths, triad-based proximity)
-- Enable musical transformations (e.g., reversal, reflection)
+- **stylefinder_dataset.py**  
+  Extracts key musical features from a folder of MusicXML files and stores them in `stylefinder_features.csv`.
 
-## 🧠 Concept
+- **stylefinder_visualizer.py**  
+  Uses PCA and unsupervised clustering (k-means) to project and visualize stylistic distances and groupings between works.
 
-This tool is inspired by Arvo Pärt's **tintinnabuli** style, which builds harmony lines that are closely tied to a central triad. It uses algorithmic logic to simulate this technique, helping composers and students explore minimalist composition methods.
+## Current Status
+- Total works analyzed: 39
+- Groupings manually labeled: 7
+- Next targets: More Messiaen and Pärt orchestral works (e.g. *Tabula Rasa*, *Et exspecto*, *Des canyons aux étoiles*)
 
-## ✅ Current Features
+## Project Goals
+- Identify stylistic archetypes
+- Map signature vs aspirational styles
+- Support development of AIMystica (sacred music AI engine)
 
-- Generate tintinnabuli harmonies from a melody
-- Support for simple melody input
-- Melody transformations: reverse, reflect
+---
 
-## 🚀 Coming Soon
-
-- MIDI input/output
-- GUI for interactive exploration
-- Multiple harmonic "modes" (e.g., M-voice vs T-voice)
-- Polyphonic input handling
-
-## 📦 Requirements
-
-- Python 3.x
-
-## 🛠 How to Run
-
-```bash
-python tintinnabuli_harmonizer.py
+> Developed by Anthony Millner, June 2025
